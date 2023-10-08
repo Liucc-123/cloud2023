@@ -7,6 +7,10 @@
     <groupId>com.liucc.springcloud</groupId>
     <artifactId>cloud2023</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>cloud-provider-payment8001</module>
+    </modules>
 
     <!-- 统一管理jar包版本 -->
     <properties>
@@ -85,6 +89,7 @@
 
     <build>
         <plugins>
+            <!--spring-boot-maven-plugin 插件在打jar包时，会将该jar所依赖的包也打下来-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
