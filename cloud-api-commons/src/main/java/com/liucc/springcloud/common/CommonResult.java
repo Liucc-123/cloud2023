@@ -6,19 +6,19 @@ import lombok.NoArgsConstructor;
 
 /**
  * @ClassName: CommonResult
- * @Description: TODO (用一句话描述该文件做什么)
- * @author: liuchuangchuang
- * @date: 2023/10/8 17:30
- * @version: V1.0
- */
+ * @description: 通用返回结果
+ * @author: XZQ
+ * @create: 2020/3/5 17:56
+ **/
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class CommonResult<T> {
     private Integer code;
     private String message;
-    private  T   data;
-    public CommonResult(Integer code, String message){
+    private T data;
+
+    public CommonResult(Integer code, String message) {
         this(code, message, null);
     }
 }

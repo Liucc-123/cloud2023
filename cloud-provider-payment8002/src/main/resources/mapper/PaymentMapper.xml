@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liucc.springcloud.mapper.PaymentMapper">
+
+    <resultMap id="BaseResultMap" type="com.liucc.springcloud.entity.Payment">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="serial" column="serial" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,serial
+    </sql>
+    <!--  useGeneratedKeys：允许主键自增  -->
+    <insert id="create" parameterType="com.liucc.springcloud.entity.Payment" useGeneratedKeys="true" keyProperty="id">
+        insert into payment(serial) values(#{payment.serial});
+    </insert>
+
+    <select id="selectByIdPayment" resultMap="BaseResultMap">
+        select id, serial from payment where id = #{id}
+    </select>
+</mapper>
