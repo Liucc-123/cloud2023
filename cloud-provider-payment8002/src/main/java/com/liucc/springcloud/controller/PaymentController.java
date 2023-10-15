@@ -42,4 +42,9 @@ public class PaymentController {
             return new CommonResult<Payment>(444, "查询结果不存在：查询id："+ id + "，端口是：" + port);
         }
     }
+
+    @GetMapping("/lb")
+    public String getServerPort(){
+        return port;
+    }
 }
