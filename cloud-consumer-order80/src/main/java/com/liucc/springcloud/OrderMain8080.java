@@ -14,10 +14,10 @@ import org.springframework.cloud.netflix.ribbon.RibbonClient;
  **/
 @SpringBootApplication
 @EnableEurekaClient
-// 使用指定的负载均衡算法 name：
+// 使用指定的负载均衡算法 name：要负载均衡的服务名
 @RibbonClient(name = "CLOUD-PAYMENT-SERVICE", configuration = MySelfRule.class)
-public class OrderMain80 {
+public class OrderMain8080 {
     public static void main(String[] args) {
-        SpringApplication.run(OrderMain80.class, args);
+        SpringApplication.run(OrderMain8080.class, args);
     }
 }
