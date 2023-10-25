@@ -70,4 +70,15 @@ public class PaymentController {
     public String getServerPort(){
         return port;
     }
+
+    @GetMapping("/feign/timeout")
+    public String getFeignTimeOut(){
+        try {
+            // 模拟长流程
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return port;
+    }
 }

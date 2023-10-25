@@ -21,4 +21,7 @@ public interface PaymentFeign {
 
     @GetMapping("/getPayment/{id}")
     CommonResult getPayment(@PathVariable("id") Long id);
+
+    @GetMapping("/feign/timeout")
+    String getFeignTimeOut();
 }
