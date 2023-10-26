@@ -1,6 +1,9 @@
 package com.liucc.springcloud.controller;
 
 import com.liucc.springcloud.service.PaymentService;
+import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,6 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/hystrix/payment")
 @Slf4j
+// 通用服务降级方法：payment_Global_FallbackMethod
+@DefaultProperties(defaultFallback = "payment_Global_FallbackMethod")
 public class PaymentController {
     @Value("${server.port}")
     private String port;
@@ -31,7 +36,24 @@ public class PaymentController {
     }
 
     @GetMapping("/timeout/{id}")
+    @HystrixCommand //没有指定降级方法，就是用通用降级方法
     public String paymentTimeOut(@PathVariable("id")String id){
         return paymentService.paymentInfo_TimeOut(id);
+    }
+    @GetMapping("/payment/circuit/{id}")
+    public String paymentCircuitBreaker(@PathVariable("id") Integer id)
+    {
+        String result = paymentService.paymentCircuitBreaker(id);
+        log.info("****result: "+result);
+        return result;
+    }
+
+    /**
+     * 通用降级方法，当服务接口出现异常时，将返回方法的结果
+     * @return
+     */
+    public String payment_Global_FallbackMethod()
+    {
+        return "Global异常处理信息，请稍后再试，/(ㄒoㄒ)/~~";
     }
 }
